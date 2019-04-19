@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MafiaFlix.Models;
+using MafiaFlix.Models.DataManager;
+using MafiaFlix.Models.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,7 @@ namespace MafiaFlix
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MafiaFlixContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MafiaFlixDB"]));
+            services.AddScoped<IDataRepository<Movie>, MovieManager>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
